@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:57:31 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/13 19:49:49 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:32:10 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	pa(t_stack *stack)
 	
 	stack->size_a++;
 	stack->size_b--;
+	write(1, "pa\n", 3);
 }
 
 void pb(t_stack *stack)
@@ -56,4 +57,5 @@ void pb(t_stack *stack)
     
     stack->size_a--;
     stack->size_b++;
+	write(1, "pb\n", 3);
 }

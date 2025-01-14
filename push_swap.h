@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:50 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/14 03:52:49 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:33:10 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int 	push_swap_parser(int argc, char **argv, int *a_values);
 char	**ft_split(const char *s, char c);
 void	**free_char_tab(char **char_tab);
 int		count_tab_size(char **tab);
+int	push_swap_resolver(t_stack *stack);
 
 void	sa(t_stack *stack);
 void	sb(t_stack *stack);

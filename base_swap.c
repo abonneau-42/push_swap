@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:37:45 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/13 19:49:33 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:31:13 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	sa(t_stack *stack)
 	tmp = stack->top_a->value;
 	stack->top_a->value = stack->top_a->next->value;
 	stack->top_a->next->value = tmp;
+	write(1, "sa\n", 3);
 }
 
 void	sb(t_stack *stack)
@@ -32,10 +33,12 @@ void	sb(t_stack *stack)
 	tmp = stack->top_b->value;
 	stack->top_b->value = stack->top_b->next->value;
 	stack->top_b->next->value = tmp;
+	write(1, "sb\n", 3);
 }
 
 void	ss(t_stack *stack)
 {
 	sa(stack);
 	sb(stack);
+	write(1, "ss\n", 3);
 }

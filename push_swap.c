@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:59 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/14 04:16:44 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:33:18 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,18 @@ int	main(int argc, char **argv)
 	int	*a_values;
 	char **tab;
 	
+	stack.size_a = argc - 1;
 	if (argc == 2)
 	{
 		tab = ft_split(argv[1], ' ');
 		if (!tab)
 			return (0);
-		a_values = malloc(sizeof(int) * count_tab_size(tab));
+		stack.size_a = count_tab_size(tab);
+		a_values = malloc(sizeof(int) * stack.size_a);
 		argv = tab;
 	}
 	else
-		a_values = malloc(sizeof(int) * (argc - 1));
+		a_values = malloc(sizeof(int) * stack.size_a);
 	if (!a_values)
 		return (0);
 	if (!push_swap_parser(argc, argv, a_values))
@@ -36,12 +38,13 @@ int	main(int argc, char **argv)
 		free(a_values);
 		return (0);
 	}
-	if (argc < 3)
+	if (stack.size_a < 2)
 	{
 		free(a_values);
 		return (0);
 	}
-	stack.size_a = argc - 1;
+
+	
 	stack.size_b = 0;
 	stack.top_a = NULL;
 	stack.top_b = NULL;
@@ -53,6 +56,10 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	stack.top_a = stack.a[0];
+
+	push_swap_resolver(&stack);
+
+	
 }
 
 
