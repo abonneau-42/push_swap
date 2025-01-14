@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:38:09 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/14 18:52:09 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:15:58 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int push_swap_resolver_simple(t_stack *stack)
 	val2 = stack->top_a->next->value;
 	val3 = stack->top_a->next->next->value;
 	
-
     void (*tab[2][2][2])(t_stack *) = {
         {
             {
@@ -64,21 +63,45 @@ int push_swap_resolver_simple(t_stack *stack)
         operation(stack);
 }
 
+
+
 int push_swap_resolver_complex(t_stack *stack)
-{
-	int max;
-	int min;
-	
+{	
 	pb(stack);
-	max = stack->top_b->value;
+	stack->max_b = stack->top_b->value;
 	pb(stack);
-	if (max < stack->top_b->value)
+	if (stack->max_b < stack->top_b->value)
 	{
-		min = max;
-		max = stack->top_b->value;
+		stack->min_b = stack->max_b;
+		stack->max_b = stack->top_b->value;
 	}
 	else
-		min = stack->top_b->value;
+		stack->min_b = stack->top_b->value;
+
+	t_list *tmp = stack->top_a;
+	int i = 0;
+	
+	while (i < stack->size_a)
+	{
+		cost_a
+	}
+
+
+
+
+	// t_list *tmp = stack->top_a;
+	// int i = 0;
+
+	// while (i < stack->size_a)
+	// {
+		
+	// 	tmp = tmp->next;
+	// 	i++;
+	// }
+	
+	// while ()
+	// if (stack->top_a->value > max || stack->top_a->value < min)
+		
 	
 	
 

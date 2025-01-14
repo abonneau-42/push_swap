@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:50 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/14 17:33:10 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:04:34 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,15 @@ typedef struct s_stack
 	t_list 	**b;
 	size_t	size_a;
 	size_t	size_b;
+	int		max_b;
+	int		min_b;
 }	t_stack;
+
+typedef struct s_dir
+{
+	int value;
+	char dir;
+}	t_dir;
 
 long	ft_atoi(const char *nptr);
 int		create_bidir_list(t_list **a, int *a_values, size_t size_a);
