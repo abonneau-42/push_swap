@@ -1,41 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   base_swap.c                                        :+:      :+:    :+:   */
+/*   utility.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 13:37:45 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/13 19:49:33 by abonneau         ###   ########.fr       */
+/*   Created: 2025/01/14 03:07:23 by abonneau          #+#    #+#             */
+/*   Updated: 2025/01/14 03:52:19 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa(t_stack *stack)
+void	**free_char_tab(char **char_tab)
 {
-	int	tmp;
-	
-	if (stack->size_a < 2)
-		return ;
-	tmp = stack->top_a->value;
-	stack->top_a->value = stack->top_a->next->value;
-	stack->top_a->next->value = tmp;
+	int i;
+
+	i = 0;
+	while (char_tab[i])
+		free(char_tab[i++]);
+	free(char_tab);
 }
 
-void	sb(t_stack *stack)
+int	count_tab_size(char **tab)
 {
-	int	tmp;
-	
-	if (stack->size_b < 2)
-		return ;
-	tmp = stack->top_b->value;
-	stack->top_b->value = stack->top_b->next->value;
-	stack->top_b->next->value = tmp;
-}
+	int i;
 
-void	ss(t_stack *stack)
-{
-	sa(stack);
-	sb(stack);
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }

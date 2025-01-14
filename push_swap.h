@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:50 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/13 19:07:07 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/14 03:52:49 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 
 typedef struct s_list
 {
@@ -33,9 +34,13 @@ typedef struct s_stack
 	size_t	size_b;
 }	t_stack;
 
-int		ft_atoi(const char *nptr);
-int		create_bidir_list(t_list **a, char **value, size_t size_a);
+long	ft_atoi(const char *nptr);
+int		create_bidir_list(t_list **a, int *a_values, size_t size_a);
 void	lstadd_bidir_front(t_list **top, int value);
+int 	push_swap_parser(int argc, char **argv, int *a_values);
+char	**ft_split(const char *s, char c);
+void	**free_char_tab(char **char_tab);
+int		count_tab_size(char **tab);
 
 void	sa(t_stack *stack);
 void	sb(t_stack *stack);
