@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 20:11:58 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/14 20:13:26 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/17 19:21:13 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 t_dir	count_cost_b_to_value(t_stack *stack, int value)
 {
-	t_list 	*tmp = stack->top_b;
-	int 	i = 0;
-	int 	nearest_value; // valeur plus basse
+	t_list 	*tmp;
+	int 	i;
+	int 	nearest_value;
 	t_dir	cost;
 
-	nearest_value = stack->top_b;
+	tmp = stack->top_b;
+	i = 0;
+	nearest_value = stack->top_b->value;
 	cost.dir = 'n';
+	cost.value = stack->size_b;
 	while (i < stack->size_b)
 	{
-		if (value - tmp->value < value - nearest_value)
+		if (tmp->value < value && abs(value - tmp->value) < abs(value - nearest_value))
 		{
 			nearest_value = tmp->value;
 			cost.value = i;
@@ -38,6 +41,10 @@ t_dir	count_cost_b_to_value(t_stack *stack, int value)
 	}
 	return (cost);
 }
+
+
+
+
 
 t_dir	count_cost_b_to_max(t_stack *stack)
 {
@@ -71,6 +78,12 @@ t_dir	count_cost_b(t_stack *stack, t_list *lst)
 		cost = count_cost_b_to_value(stack, lst->value);
 	}
 	else
+	{
 		cost = count_cost_b_to_max(stack);
+		if (lst->value < stack->min_b)
+			stack->min_b = lst->value;
+		else if (lst->value > stack->max_b)
+			stack->max_b = lst->value;
+	}
 	return (cost);
 }

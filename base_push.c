@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:57:31 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/14 17:32:10 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/17 18:43:12 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,15 @@ void	pa(t_stack *stack)
 
 	tmp = stack->top_b->value;
 
-	(stack->top_b->prev)->next = stack->top_b->next;
-	(stack->top_b->next)->prev = stack->top_b->prev;
-
-	new_top_b = stack->top_b->next;
+	if (stack->size_b == 1)  // Si stack->top_b est le seul élément
+        new_top_b = NULL;
+	else
+	{
+		(stack->top_b->prev)->next = stack->top_b->next;
+		(stack->top_b->next)->prev = stack->top_b->prev;
+		new_top_b = stack->top_b->next;
+	}
+	
 	free(stack->top_b);
 	stack->top_b = new_top_b;
 
@@ -46,10 +51,14 @@ void pb(t_stack *stack)
 
     tmp = stack->top_a->value;
 
-	(stack->top_a->prev)->next = stack->top_a->next;
-	(stack->top_a->next)->prev = stack->top_a->prev;
-
-	new_top_a = stack->top_a->next;
+	if (stack->size_a == 1)  // Si stack->top_b est le seul élément
+        new_top_a = NULL;
+	else
+	{
+		(stack->top_a->prev)->next = stack->top_a->next;
+		(stack->top_a->next)->prev = stack->top_a->prev;
+		new_top_a = stack->top_a->next;
+	}
 	free(stack->top_a);
 	stack->top_a = new_top_a;
 

@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:05:17 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/13 19:00:32 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/17 18:41:36 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void	lstadd_bidir_front(t_list **top, int value)
 	}
 	new->next = *top;
 	new->prev = (*top)->prev;
-	(*top)->prev->next = new;
+	
+	if ((*top)->prev) // Ajout de vérification pour éviter NULL dereference
+		(*top)->prev->next = new;
+		
 	(*top)->prev = new;
 	*top = new;
 }

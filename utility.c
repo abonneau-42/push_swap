@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:07:23 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/14 03:52:19 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/17 19:30:24 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,17 @@ int	count_tab_size(char **tab)
 	while (tab[i])
 		i++;
 	return (i);
+}
+
+long ft_abs(int number)
+{
+	if (number < 0)
+		return (number * (-1));
+	return (number);
+}
+int ft_min(int first, int second)
+{
+	if (first < second)
+		return (first);
+	return (second);
 }
