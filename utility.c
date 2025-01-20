@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:07:23 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/17 19:30:24 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/20 20:22:07 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,17 @@ long ft_abs(int number)
 		return (number * (-1));
 	return (number);
 }
+
 int ft_min(int first, int second)
 {
 	if (first < second)
+		return (first);
+	return (second);
+}
+
+int ft_max(int first, int second)
+{
+	if (first > second)
 		return (first);
 	return (second);
 }

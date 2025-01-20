@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:50 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/17 19:30:33 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/20 20:22:36 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int		count_tab_size(char **tab);
 int		push_swap_resolver(t_stack *stack);
 long 	ft_abs(int number);
 int 	ft_min(int first, int second);
+int 	ft_max(int first, int second);
 
 t_dir 	count_cost_to_push_value(t_stack *stack, int value);
 t_dir	count_cost_b_to_max(t_stack *stack);

@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 14:18:04 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/14 17:30:51 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/20 20:06:53 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ void	rb(t_stack *stack)
 
 void	rr(t_stack *stack)
 {
-	ra(stack);
-	rb(stack);
+	if (stack->size_a < 2)
+		return ;
+	stack->top_a = stack->top_a->next;
+	if (stack->size_b < 2)
+		return ;
+	stack->top_b = stack->top_b->next;
 	write(1, "rr\n", 3);
 }
