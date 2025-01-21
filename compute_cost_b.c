@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 20:11:58 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/20 18:47:43 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:14:08 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,6 @@ t_dir	count_cost_b_to_value(t_stack *stack, int value)
 
 	find_position(stack, value, &nearest_min_value, &nearest_max_value);
 
-	// printf("--------------------\n");
-	// printf("value=%i\n", value);
-	// printf("nearest_min_value=%i\n", nearest_min_value);
-	// printf("nearest_max_value=%i\n", nearest_max_value);
-	
 	while (nearest_min_value != tmp->value)
 	{
 		tmp = tmp->next;
@@ -59,12 +54,6 @@ t_dir	count_cost_b_to_value(t_stack *stack, int value)
 
 	cost.dir = 'n';
 	cost.value = i;	
-	if (cost.value > stack->size_b / 2)
-	{
-		// printf("okdsdz\n");
-		cost.value = stack->size_b - cost.value;
-		cost.dir = 'p';
-	}
 	return (cost);
 }
 
@@ -113,11 +102,6 @@ t_dir	count_cost_b_to_max(t_stack *stack)
 			break;
 		tmp = tmp->next;
 		cost.value++;
-	}
-	if (cost.value > stack->size_b / 2)
-	{
-		cost.value = stack->size_b - cost.value;
-		cost.dir = 'p';
 	}
 	return (cost);
 }
