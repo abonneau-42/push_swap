@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:38:09 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 15:03:47 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:45:56 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,78 +31,58 @@ void	push_swap_3(t_stack	*stack)
 		sa(stack);
 }
 
-void	compute_best_move(t_stack *stack, t_list *tmp, int *total_cost_tmp, t_dir *dirs)
+void	compute_best_move(t_stack *stack, t_list *tmp, t_move_data *move_data)
 {
 	t_dir	cost_a;
 	t_dir	cost_b;
-	int		total_cost;
 
-	total_cost = (stack->size_a + stack->size_b) * 4;
 	cost_a = count_cost_to_push_value(stack, tmp->value);
 	cost_b = count_cost_b(stack, tmp);
-	total_cost = ft_max(cost_a.value, cost_b.value);
-	if (total_cost < *total_cost_tmp)
-	{
-		*total_cost_tmp = total_cost;
-		dirs[0] = cost_a;
-		dirs[1] = cost_b;
-	}
+	update_best_move(move_data, true, cost_a, cost_b);
 	cost_a = invert_rotation(stack, cost_a, stack->size_a);
 	cost_b = invert_rotation(stack, cost_b, stack->size_b);
-	total_cost = ft_max(cost_a.value, cost_b.value);
-	if (total_cost < *total_cost_tmp)
-	{
-		*total_cost_tmp = total_cost;
-		dirs[0] = cost_a;
-		dirs[1] = cost_b;
-	}
+	update_best_move(move_data, true, cost_a, cost_b);
 	cost_a = find_best_rotation(stack, cost_a, stack->size_a, 'n');
 	cost_b = find_best_rotation(stack, cost_b, stack->size_b, 'n');
-	total_cost = cost_a.value + cost_b.value;
-	if (total_cost < *total_cost_tmp)
-	{
-		*total_cost_tmp = total_cost;
-		dirs[0] = cost_a;
-		dirs[1] = cost_b;
-	}
+	update_best_move(move_data, false, cost_a, cost_b);
 }
 
-void	findbest_move(t_stack *stack, int size, t_dir *dirs)
+void	findbest_move(t_stack *stack, int size, t_move_data *move_data)
 {
 	t_list	*tmp;
 	t_dir	cost_a;
 	t_dir	cost_b;
-	int		total_cost_tmp;
 
 	tmp = stack->top_a;
-	total_cost_tmp = (stack->size_a + stack->size_b) * 4;
-	dirs[0].value = (stack->size_a + stack->size_b) * 2;
-	dirs[1].value = (stack->size_a + stack->size_b) * 2;
+	move_data->total_cost_tmp = (stack->size_a + stack->size_b) * 4;
+	move_data->dirs[0].value = (stack->size_a + stack->size_b) * 2;
+	move_data->dirs[1].value = (stack->size_a + stack->size_b) * 2;
 	while (size--)
 	{
-		compute_best_move(stack, tmp, &total_cost_tmp, dirs);
+		compute_best_move(stack, tmp, move_data);
 		tmp = tmp->next;
 	}
 }
 
 int	push_swap_resolver_complex(t_stack *stack)
 {
-	t_dir	dirs[2];
-	t_dir	max;
+	t_dir		max;
+	t_move_data	move_data;
 
 	pb(stack);
 	pb(stack);
 	while (stack->size_a)
 	{
 		update_stack_limits(stack);
-		findbest_move(stack, stack->size_a, dirs);
-		handle_common_actions(stack, dirs);
-		apply_rotation(stack, &dirs[0], ra, rra);
-		apply_rotation(stack, &dirs[1], rb, rrb);
+		findbest_move(stack, stack->size_a, &move_data);
+		handle_common_actions(stack, move_data.dirs);
+		apply_rotation(stack, &move_data.dirs[0], ra, rra);
+		apply_rotation(stack, &move_data.dirs[1], rb, rrb);
 		pb(stack);
 	}
 	update_stack_limits(stack);
-	max = find_best_rotation(stack, count_cost_b_to_max(stack), stack->size_b, 'p');
+	max = find_best_rotation(stack,
+			count_cost_b_to_max(stack), stack->size_b, 'p');
 	apply_rotation(stack, &max, rb, rrb);
 	while (stack->size_b)
 		pa(stack);

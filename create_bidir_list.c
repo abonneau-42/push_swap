@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 16:19:47 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/14 02:16:54 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:53:47 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	create_bidir_list(t_list **a, int *a_values, size_t size_a)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < size_a)
 	{

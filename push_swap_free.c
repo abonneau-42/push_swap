@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:52:30 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 12:54:07 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:59:42 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	push_swap_free(t_stack *stack, int *a_values)
 {
-	t_list *tmp = stack->top_a;
-	
+	t_list	*tmp;
+
+	tmp = stack->top_a;
 	free(a_values);
 	tmp = stack->top_a;
 	while (stack->size_a)

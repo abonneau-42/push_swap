@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:59 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 13:27:35 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:24:33 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 		free(a_values);
 		return (1);
 	}
-	if (!stack_initialiser(&stack, a_values, stack.size_a))
+	if (!stack_initialiser(&stack, a_values))
 	{
 		push_swap_free(&stack, a_values);
 		return (2);

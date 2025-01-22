@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 02:30:04 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/14 03:11:06 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:01:52 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ char	**free_tab(char **char_tab, int size)
 
 int	word_count(char *s, char c)
 {
-	int word = 0;
+	int	word;
 
+	word = 0;
 	while (*s)
 	{
 		if (*s != c)
@@ -38,9 +39,9 @@ int	word_count(char *s, char c)
 	return (word);
 }
 
-char *strndup(char *str, size_t n)
+char	*strndup(char *str, size_t n)
 {
-	char *newstr;
+	char	*newstr;
 
 	newstr = malloc(sizeof(char) * (n + 1));
 	if (!newstr)
@@ -53,10 +54,12 @@ char *strndup(char *str, size_t n)
 
 char	**ft_split(const char *s, char c)
 {
-	char **tab;
-	int	i = 0;
-	int j = 0;
-	
+	char	**tab;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
 	tab = malloc(sizeof(char *) * (word_count((char *)s, c) + 1));
 	if (!tab)
 		return (NULL);

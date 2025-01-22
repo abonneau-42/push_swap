@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 15:19:28 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/14 01:33:38 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:55:39 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ long	ft_atoi(const char *nptr)
 	i = 0;
 	result = 0;
 	sign = 1;
-
 	if (nptr[i] == '-')
 	{
 		sign = -1;

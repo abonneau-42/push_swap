@@ -6,44 +6,17 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 00:33:51 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 13:26:22 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:52:42 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int is_number(char *str)
+int	is_include(int *already_seen, int count, int value)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	if (str[i] == '-')
-		i++;
-	while (str[i])
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-int is_include(int *already_seen, int count, int value)
-{
-	int i;
-
-	i = 0;
-		
 	while (i < count)
 	{
 		if (already_seen[i] == value)
@@ -53,16 +26,17 @@ int is_include(int *already_seen, int count, int value)
 	return (0);
 }
 
-int check_number(char *chr, int *a_values, int *i)
+int	check_number(char *chr, int *a_values, int *i)
 {
-	long value;
-		
+	long	value;
+
 	if (!is_number(chr))
 		return (0);
 	if (ft_strlen(chr) > 11)
 		return (0);
 	value = ft_atoi(chr);
-	if (value < -2147483648 || value > 2147483647 || is_include(a_values, (*i) - 1, (int)value))
+	if (value < -2147483648 || value > 2147483647
+		|| is_include(a_values, (*i) - 1, (int)value))
 		return (0);
 	a_values[(*i) - 1] = (int)value;
 	(*i)++;
@@ -71,9 +45,9 @@ int check_number(char *chr, int *a_values, int *i)
 
 int	push_swap_parser(int argc, char **argv, int *a_values)
 {
-	int i;
-	char **tab;
-	
+	int		i;
+	char	**tab;
+
 	if (argc == 2)
 	{
 		i = 1;
@@ -95,7 +69,7 @@ int	push_swap_parser(int argc, char **argv, int *a_values)
 int	push_swap_pre_parser(t_stack *stack, int argc, char **argv, int **a_values)
 {
 	char	**tab;
-	
+
 	stack->size_a = argc - 1;
 	if (argc == 2)
 	{

@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:50 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 15:03:16 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:10:42 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,25 @@
 # include <unistd.h>
 # include <stdio.h>
 
+typedef enum s_bool
+{
+	false = 0,
+	true = 1
+}	t_bool;
+
 typedef struct s_list
 {
-	int	value;
+	int				value;
 	struct s_list	*next;
 	struct s_list	*prev;
 }	t_list;
 
 typedef struct s_stack
 {
-	t_list 	*top_a;
-	t_list 	*top_b;
-	t_list 	**a;
-	t_list 	**b;
+	t_list	*top_a;
+	t_list	*top_b;
+	t_list	**a;
+	t_list	**b;
 	size_t	size_a;
 	size_t	size_b;
 	int		max_b;
@@ -38,23 +44,29 @@ typedef struct s_stack
 
 typedef struct s_dir
 {
-	int value;
-	char dir;
+	int		value;
+	char	dir;
 }	t_dir;
+
+typedef struct s_move_data
+{
+	long	total_cost_tmp;
+	t_dir	*dirs;
+}	t_move_data;
 
 long	ft_atoi(const char *nptr);
 int		create_bidir_list(t_list **a, int *a_values, size_t size_a);
 void	lstadd_bidir_front(t_list **top, int value);
-int 	push_swap_parser(int argc, char **argv, int *a_values);
+int		push_swap_parser(int argc, char **argv, int *a_values);
 char	**ft_split(const char *s, char c);
 void	**free_char_tab(char **char_tab);
 int		count_tab_size(char **tab);
 int		push_swap_resolver(t_stack *stack);
-long 	ft_abs(int number);
-int 	ft_min(int first, int second);
-int 	ft_max(int first, int second);
+long	ft_abs(int number);
+int		ft_min(int first, int second);
+int		ft_max(int first, int second);
 
-t_dir 	count_cost_to_push_value(t_stack *stack, int value);
+t_dir	count_cost_to_push_value(t_stack *stack, int value);
 t_dir	count_cost_b_to_max(t_stack *stack);
 t_dir	count_cost_b_to_value(t_stack *stack, int value);
 t_dir	count_cost_b(t_stack *stack, t_list *lst);
@@ -80,17 +92,23 @@ void	sa_ra(t_stack *stack);
 void	ra_sa(t_stack *stack);
 
 void	push_swap_free(t_stack *stack, int *a_values);
-int		stack_initialiser(t_stack *stack, int *a_values, size_t size_a);
-int		push_swap_pre_parser(t_stack *stack, int argc, char **argv, int **a_values);
+int		stack_initialiser(t_stack *stack, int *a_values);
+int		push_swap_pre_parser(t_stack *stack, int argc,
+			char **argv, int **a_values);
 
 void	apply_moves(t_stack *stack, int *value, void(*rotate)(t_stack *));
-void	common_action_handler(t_stack *stack, int common_action, char direction);
-void	apply_rotation(t_stack *stack, t_dir *dir, void (*rotate)(t_stack *), void (*reverse_rotate)(t_stack *));
+void	common_action_handler(t_stack *stack,
+			int common_action, char direction);
+void	apply_rotation(t_stack *stack, t_dir *dir,
+			void (*rotate)(t_stack *), void (*reverse_rotate)(t_stack *));
 
 t_dir	invert_rotation(t_stack *stack, t_dir cost, int stack_size);
-t_dir	find_best_rotation(t_stack *stack, t_dir cost, int stack_size, char dir);
+t_dir	find_best_rotation(t_stack *stack, t_dir cost,
+			int stack_size, char dir);
 
 void	update_stack_limits(t_stack *stack);
 void	handle_common_actions(t_stack *stack, t_dir *dirs);
+void	update_best_move(t_move_data *move_data,
+			t_bool is_double_rotation, t_dir cost_a, t_dir cost_b);
 
 #endif

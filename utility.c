@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:07:23 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/20 20:22:07 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:56:04 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	**free_char_tab(char **char_tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (char_tab[i])
@@ -24,7 +24,7 @@ void	**free_char_tab(char **char_tab)
 
 int	count_tab_size(char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tab[i])
@@ -32,23 +32,28 @@ int	count_tab_size(char **tab)
 	return (i);
 }
 
-long ft_abs(int number)
+int	is_number(char *str)
 {
-	if (number < 0)
-		return (number * (-1));
-	return (number);
+	int	i;
+
+	i = 0;
+	if (str[i] == '-')
+		i++;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
-int ft_min(int first, int second)
+size_t	ft_strlen(const char *s)
 {
-	if (first < second)
-		return (first);
-	return (second);
-}
+	size_t	i;
 
-int ft_max(int first, int second)
-{
-	if (first > second)
-		return (first);
-	return (second);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
