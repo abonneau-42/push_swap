@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:50 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 16:28:53 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:44:37 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+
+# define MAX_COST 17179869184
 
 typedef enum e_bool
 {
@@ -44,7 +46,7 @@ typedef struct s_stack
 
 typedef struct s_dir
 {
-	int		value;
+	long	value;
 	char	dir;
 }	t_dir;
 
@@ -99,9 +101,9 @@ int		stack_initialiser(t_stack *stack, int *a_values);
 int		push_swap_pre_parser(t_stack *stack, int argc,
 			char **argv, int **a_values);
 
-void	apply_moves(t_stack *stack, int *value, void(*rotate)(t_stack *));
+void	apply_moves(t_stack *stack, long *value, void(*rotate)(t_stack *));
 void	common_action_handler(t_stack *stack,
-			int common_action, char direction);
+			long common_action, char direction);
 void	apply_rotation(t_stack *stack, t_dir *dir,
 			void (*rotate)(t_stack *), void (*reverse_rotate)(t_stack *));
 

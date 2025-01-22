@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:01:13 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 15:55:00 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:40:40 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	update_stack_limits(t_stack *stack)
 
 void	handle_common_actions(t_stack *stack, t_dir *dirs)
 {
-	int	common_action;
+	long	common_action;
 
 	common_action = 0;
 	if (dirs[0].dir == dirs[1].dir)
@@ -68,7 +68,7 @@ void	update_best_move(t_move_data *move_data, t_bool is_double_rotation,
 {
 	long	total_cost;
 
-	total_cost = 17179869184;
+	total_cost = MAX_COST;
 	if (is_double_rotation)
 		total_cost = ft_max(cost_a.value, cost_b.value);
 	else

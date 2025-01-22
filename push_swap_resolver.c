@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:38:09 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 16:23:33 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:45:27 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	findbest_move(t_stack *stack, int size, t_move_data *move_data)
 	t_dir	cost_b;
 
 	tmp = stack->top_a;
-	move_data->total_cost_tmp = (stack->size_a + stack->size_b) * 4;
-	move_data->dirs[0].value = (stack->size_a + stack->size_b) * 2;
-	move_data->dirs[1].value = (stack->size_a + stack->size_b) * 2;
+	move_data->total_cost_tmp = MAX_COST;
+	move_data->dirs[0].value = MAX_COST;
+	move_data->dirs[1].value = MAX_COST;
 	while (size--)
 	{
 		compute_best_move(stack, tmp, move_data);
