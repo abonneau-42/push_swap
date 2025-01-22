@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:50 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/20 20:22:36 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:03:16 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,24 @@ void	rr(t_stack *stack);
 void	rra(t_stack *stack);
 void	rrb(t_stack *stack);
 void	rrr(t_stack *stack);
+
+void	sb_rb(t_stack *stack);
+void	rb_sb(t_stack *stack);
+void	sa_ra(t_stack *stack);
+void	ra_sa(t_stack *stack);
+
+void	push_swap_free(t_stack *stack, int *a_values);
+int		stack_initialiser(t_stack *stack, int *a_values, size_t size_a);
+int		push_swap_pre_parser(t_stack *stack, int argc, char **argv, int **a_values);
+
+void	apply_moves(t_stack *stack, int *value, void(*rotate)(t_stack *));
+void	common_action_handler(t_stack *stack, int common_action, char direction);
+void	apply_rotation(t_stack *stack, t_dir *dir, void (*rotate)(t_stack *), void (*reverse_rotate)(t_stack *));
+
+t_dir	invert_rotation(t_stack *stack, t_dir cost, int stack_size);
+t_dir	find_best_rotation(t_stack *stack, t_dir cost, int stack_size, char dir);
+
+void	update_stack_limits(t_stack *stack);
+void	handle_common_actions(t_stack *stack, t_dir *dirs);
 
 #endif

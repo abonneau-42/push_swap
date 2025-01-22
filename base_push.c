@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:57:31 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/20 20:07:55 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:40:52 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	pa(t_stack *stack)
 
 	tmp = stack->top_b->value;
 
-	if (stack->size_b == 1)  // Si stack->top_b est le seul élément
+	if (stack->size_b == 1)
         new_top_b = NULL;
 	else
 	{
@@ -51,7 +51,7 @@ void pb(t_stack *stack)
 
     tmp = stack->top_a->value;
 
-	if (stack->size_a == 1)  // Si stack->top_b est le seul élément
+	if (stack->size_a == 1)
         new_top_a = NULL;
 	else
 	{

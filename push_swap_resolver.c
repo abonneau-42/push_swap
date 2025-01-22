@@ -6,128 +6,40 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:38:09 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/21 19:20:30 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:03:47 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_stack_a(t_stack *stack)
+void	push_swap_3(t_stack	*stack)
 {
-	int i = 0;
-	t_list *tmp = stack->top_a;
+	int	values[3];
 
-	while (i < stack->size_a)
-	{
-		printf("[A] index[%i]=%i\n", i, tmp->value);
-		tmp = tmp->next;
-		i++;
-	}
-}
-
-void	print_stack_b(t_stack *stack)
-{
-	int i = 0;
-	t_list *tmp = stack->top_b;
-
-	while (i < stack->size_b)
-	{
-		printf("[B] index[%i]=%i\n", i, tmp->value);
-		tmp = tmp->next;
-		i++;
-	}
-}
-
-void sb_rb(t_stack *stack)
-{
-	sb(stack);
-	rb(stack);
-}
-
-void rb_sb(t_stack *stack)
-{
-	rb(stack);
-	sb(stack);
-}
-
-void sa_ra(t_stack *stack)
-{
-	sa(stack);
-	ra(stack);
-}
-
-void ra_sa(t_stack *stack)
-{
-	ra(stack);
-	sa(stack);
-}
-
-int push_swap_resolver_simple(t_stack *stack, t_list *top)
-{
-	int	val1;
-	int	val2;
-	int	val3;
-	void (*operation)(t_stack *);
-
-	val1 = top->value;
-	val2 = top->next->value;
-	val3 = top->next->next->value;
-	
-    void (*tab[2][2][2])(t_stack *) = {
-        {
-            {
-                NULL, 		// 1 2 3
-                &sa_ra    	// 1 3 2
-            },
-            {
-                NULL,  		// impossible
-                &rra      	// 2 3 1
-            }
-        },
-        {
-            {
-                &sa,   		// 2 1 3
-                NULL   		// impossible
-            },
-            {
-                &ra, 		// 3 1 2
-                &ra_sa   	// 3 2 1
-            }
-        }
-    };
-
-	operation = tab[val1 > val2][val1 > val3][val2 > val3];
-    if (operation != NULL)
-        operation(stack);
-}
-
-
-t_dir	invert_rotation(t_stack *stack, t_dir cost, int stack_size)
-{
-		cost.value = stack_size - cost.value;
-		cost.dir = 'p';
-		return (cost);
-}
-
-t_dir	find_best_rotation(t_stack *stack, t_dir cost, int stack_size)
-{
-	if (cost.value > stack_size / 2)
-	{
-		cost.value = stack_size - cost.value;
-		cost.dir = 'n';
-	}
-	return (cost);
+	values[0] = stack->top_a->value;
+	values[1] = stack->top_a->next->value;
+	values[2] = stack->top_a->next->next->value;
+	if (values[0] > values[1] && values[1] > values[2])
+		ra_sa(stack);
+	else if (values[0] > values[2] && values[2] > values[1])
+		ra(stack);
+	else if (values[1] > values[0] && values[0] > values[2])
+		rra(stack);
+	else if (values[1] > values[2] && values[2] > values[0])
+		sa_ra(stack);
+	else if (values[2] > values[0] && values[0] > values[1])
+		sa(stack);
 }
 
 void	compute_best_move(t_stack *stack, t_list *tmp, int *total_cost_tmp, t_dir *dirs)
 {
-	t_dir 	cost_a;
+	t_dir	cost_a;
 	t_dir	cost_b;
-	int		total_cost = (stack->size_a + stack->size_b) * 4;
+	int		total_cost;
 
+	total_cost = (stack->size_a + stack->size_b) * 4;
 	cost_a = count_cost_to_push_value(stack, tmp->value);
 	cost_b = count_cost_b(stack, tmp);
-
 	total_cost = ft_max(cost_a.value, cost_b.value);
 	if (total_cost < *total_cost_tmp)
 	{
@@ -135,10 +47,8 @@ void	compute_best_move(t_stack *stack, t_list *tmp, int *total_cost_tmp, t_dir *
 		dirs[0] = cost_a;
 		dirs[1] = cost_b;
 	}
-
 	cost_a = invert_rotation(stack, cost_a, stack->size_a);
 	cost_b = invert_rotation(stack, cost_b, stack->size_b);
-	
 	total_cost = ft_max(cost_a.value, cost_b.value);
 	if (total_cost < *total_cost_tmp)
 	{
@@ -146,10 +56,8 @@ void	compute_best_move(t_stack *stack, t_list *tmp, int *total_cost_tmp, t_dir *
 		dirs[0] = cost_a;
 		dirs[1] = cost_b;
 	}
-	
-	cost_a = find_best_rotation(stack, cost_a, stack->size_a);
-	cost_b = find_best_rotation(stack, cost_b, stack->size_b);
-	
+	cost_a = find_best_rotation(stack, cost_a, stack->size_a, 'n');
+	cost_b = find_best_rotation(stack, cost_b, stack->size_b, 'n');
 	total_cost = cost_a.value + cost_b.value;
 	if (total_cost < *total_cost_tmp)
 	{
@@ -161,11 +69,13 @@ void	compute_best_move(t_stack *stack, t_list *tmp, int *total_cost_tmp, t_dir *
 
 void	findbest_move(t_stack *stack, int size, t_dir *dirs)
 {
-	t_list *tmp = stack->top_a;
-	t_dir 	cost_a;
+	t_list	*tmp;
+	t_dir	cost_a;
 	t_dir	cost_b;
-	int 	total_cost_tmp = (stack->size_a + stack->size_b) * 4;
+	int		total_cost_tmp;
 
+	tmp = stack->top_a;
+	total_cost_tmp = (stack->size_a + stack->size_b) * 4;
 	dirs[0].value = (stack->size_a + stack->size_b) * 2;
 	dirs[1].value = (stack->size_a + stack->size_b) * 2;
 	while (size--)
@@ -175,145 +85,31 @@ void	findbest_move(t_stack *stack, int size, t_dir *dirs)
 	}
 }
 
-void common_action_handler(t_stack *stack, int common_action, char direction)
+int	push_swap_resolver_complex(t_stack *stack)
 {
-	if (direction == 'n')
-	{
-		while (common_action)
-		{
-			rr(stack);
-			common_action--;
-		}
-	}
-	else
-	{
-		while (common_action)
-		{
-			rrr(stack);
-			common_action--;
-		}
-	}
-}
-
-
-void	find_new_limit(t_stack *stack)
-{
-	t_list *tmp = stack->top_b;
-	int 	i;
-
-	i = 0;
-	stack->max_b = stack->top_b->value;
-	stack->min_b = stack->top_b->value;
-	while (i < stack->size_b)
-	{
-		if (tmp->value > stack->max_b)
-			stack->max_b = tmp->value;
-		if (tmp->value < stack->min_b)
-			stack->min_b = tmp->value;
-		tmp = tmp->next;
-		i++;
-	}
-}
-
-
-int push_swap_resolver_complex(t_stack *stack)
-{	
-	pb(stack);
-	pb(stack);
-	
 	t_dir	dirs[2];
-	
+	t_dir	max;
+
+	pb(stack);
+	pb(stack);
 	while (stack->size_a)
 	{
-		find_new_limit(stack);
+		update_stack_limits(stack);
 		findbest_move(stack, stack->size_a, dirs);
-		
-		int common_action;
-
-		common_action = 0;
-		
-		
-		if (dirs[0].dir == dirs[1].dir)
-		{
-			common_action = ft_min(dirs[0].value, dirs[1].value);
-			common_action_handler(stack, common_action, dirs[0].dir);
-			dirs[0].value = dirs[0].value - common_action;
-			dirs[1].value = dirs[1].value - common_action;
-		}
-
-		if (dirs[0].dir == 'n')
-		{
-			while (dirs[0].value)
-			{
-				ra(stack);
-				dirs[0].value--;
-			}
-		}
-		else
-		{
-			while (dirs[0].value)
-			{
-				rra(stack);
-				dirs[0].value--;
-			}
-		}
-
-		if (dirs[1].dir == 'n')
-		{
-			while (dirs[1].value)
-			{
-				rb(stack);
-				dirs[1].value--;
-			}
-		}
-		else
-		{
-			while (dirs[1].value)
-			{
-				rrb(stack);
-				dirs[1].value--;
-			}
-		}
-		
+		handle_common_actions(stack, dirs);
+		apply_rotation(stack, &dirs[0], ra, rra);
+		apply_rotation(stack, &dirs[1], rb, rrb);
 		pb(stack);
 	}
-
-	find_new_limit(stack);
-	t_dir max;
-	
-	max = count_cost_b_to_max(stack);
-	if (max.value > stack->size_b / 2)
-	{
-		max.value = stack->size_b - max.value;
-		max.dir = 'p';
-	}
-	if (max.dir == 'n')
-	{
-		while (max.value)
-		{
-			rb(stack);
-			max.value--;
-		}
-	}
-	else
-	{
-		while (max.value)
-		{
-			rrb(stack);
-			max.value--;
-		}
-	}
-
-	int j = stack->size_b;
-	while (j)
-	{
+	update_stack_limits(stack);
+	max = find_best_rotation(stack, count_cost_b_to_max(stack), stack->size_b, 'p');
+	apply_rotation(stack, &max, rb, rrb);
+	while (stack->size_b)
 		pa(stack);
-		j--;
-	}
 }
 
 int	push_swap_resolver(t_stack *stack)
-{	
+{
 	if (stack->size_a == 2)
 	{
 		if (stack->top_a->value > stack->top_a->next->value)
@@ -322,7 +118,7 @@ int	push_swap_resolver(t_stack *stack)
 			return (1);
 	}
 	else if (stack->size_a == 3)
-		push_swap_resolver_simple(stack, stack->top_a);
+		push_swap_3(stack);
 	else
 		push_swap_resolver_complex(stack);
 	return (1);

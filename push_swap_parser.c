@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 00:33:51 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/14 04:18:41 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 13:26:22 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,32 @@ int	push_swap_parser(int argc, char **argv, int *a_values)
 				return (0);
 	}
 	return (1);
+}
+
+int	push_swap_pre_parser(t_stack *stack, int argc, char **argv, int **a_values)
+{
+	char	**tab;
+	
+	stack->size_a = argc - 1;
+	if (argc == 2)
+	{
+		tab = ft_split(argv[1], ' ');
+		if (!tab)
+			return (1);
+		stack->size_a = count_tab_size(tab);
+		*a_values = malloc(sizeof(int) * stack->size_a);
+		argv = tab;
+	}
+	else
+		*a_values = malloc(sizeof(int) * stack->size_a);
+	if (!*a_values)
+		return (1);
+	if (!push_swap_parser(argc, argv, *a_values))
+	{
+		write(2, "Error\n", 6);
+		return (2);
+	}
+	if (stack->size_a < 2)
+		return (2);
+	return (0);
 }

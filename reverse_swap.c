@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   base_rotate.c                                      :+:      :+:    :+:   */
+/*   reverse_swap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 14:18:04 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 12:55:40 by abonneau         ###   ########.fr       */
+/*   Created: 2025/01/22 14:55:33 by abonneau          #+#    #+#             */
+/*   Updated: 2025/01/22 14:55:42 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ra(t_stack *stack)
+void	sb_rb(t_stack *stack)
 {
-	if (stack->size_a < 2)
-		return ;
-	stack->top_a = stack->top_a->next;
-	write(1, "ra\n", 3);
+	sb(stack);
+	rb(stack);
 }
 
-void	rb(t_stack *stack)
+void	rb_sb(t_stack *stack)
 {
-	if (stack->size_b < 2)
-		return ;
-	stack->top_b = stack->top_b->next;
-	write(1, "rb\n", 3);
+	rb(stack);
+	sb(stack);
 }
 
-void	rr(t_stack *stack)
+void	sa_ra(t_stack *stack)
 {
-	if (stack->size_a < 2)
-		return ;
-	stack->top_a = stack->top_a->next;
-	if (stack->size_b < 2)
-		return ;
-	stack->top_b = stack->top_b->next;
-	write(1, "rr\n", 3);
+	sa(stack);
+	ra(stack);
+}
+
+void	ra_sa(t_stack *stack)
+{
+	ra(stack);
+	sa(stack);
 }

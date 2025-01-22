@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   base_rotate.c                                      :+:      :+:    :+:   */
+/*   stack_initialiser.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 14:18:04 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 12:55:40 by abonneau         ###   ########.fr       */
+/*   Created: 2025/01/22 12:57:08 by abonneau          #+#    #+#             */
+/*   Updated: 2025/01/22 12:59:53 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ra(t_stack *stack)
+int	stack_initialiser(t_stack *stack, int *a_values, size_t size_a)
 {
-	if (stack->size_a < 2)
-		return ;
-	stack->top_a = stack->top_a->next;
-	write(1, "ra\n", 3);
-}
-
-void	rb(t_stack *stack)
-{
-	if (stack->size_b < 2)
-		return ;
-	stack->top_b = stack->top_b->next;
-	write(1, "rb\n", 3);
-}
-
-void	rr(t_stack *stack)
-{
-	if (stack->size_a < 2)
-		return ;
-	stack->top_a = stack->top_a->next;
-	if (stack->size_b < 2)
-		return ;
-	stack->top_b = stack->top_b->next;
-	write(1, "rr\n", 3);
+	stack->size_b = 0;
+	stack->top_a = NULL;
+	stack->top_b = NULL;
+	stack->a = malloc(sizeof(t_list) * stack->size_a);
+	stack->b = malloc(sizeof(t_list) * stack->size_a);
+	if (!stack->a || !stack->b ||
+		!create_bidir_list(stack->a, a_values, stack->size_a))
+	{
+		free(a_values);
+		return (0);
+	}
+	stack->top_a = stack->a[0];
+	return (1);
 }

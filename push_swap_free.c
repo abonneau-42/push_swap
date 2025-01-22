@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap_free.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 13:47:59 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 13:27:35 by abonneau         ###   ########.fr       */
+/*   Created: 2025/01/22 12:52:30 by abonneau          #+#    #+#             */
+/*   Updated: 2025/01/22 12:54:07 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+void	push_swap_free(t_stack *stack, int *a_values)
 {
-	t_stack	stack;
-	int		*a_values;
-
-	if (push_swap_pre_parser(&stack, argc, argv, &a_values) == 2)
+	t_list *tmp = stack->top_a;
+	
+	free(a_values);
+	tmp = stack->top_a;
+	while (stack->size_a)
 	{
-		free(a_values);
-		return (1);
+		tmp = tmp->next;
+		free(stack->top_a);
+		stack->top_a = tmp;
+		stack->size_a--;
 	}
-	if (!stack_initialiser(&stack, a_values, stack.size_a))
-	{
-		push_swap_free(&stack, a_values);
-		return (2);
-	}
-	push_swap_resolver(&stack);
-	push_swap_free(&stack, a_values);
-	return (0);
+	free(stack->a);
+	free(stack->b);
 }
