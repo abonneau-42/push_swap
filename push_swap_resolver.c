@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:38:09 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 16:45:27 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:11:59 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,17 @@ void	compute_best_move(t_stack *stack, t_list *tmp, t_move_data *move_data)
 	cost_a = count_cost_to_push_value(stack, tmp->value);
 	cost_b = count_cost_b(stack, tmp);
 	update_best_move(move_data, true, cost_a, cost_b);
-	cost_a = invert_rotation(stack, cost_a, stack->size_a);
-	cost_b = invert_rotation(stack, cost_b, stack->size_b);
+	cost_a = invert_rotation(cost_a, stack->size_a);
+	cost_b = invert_rotation(cost_b, stack->size_b);
 	update_best_move(move_data, true, cost_a, cost_b);
-	cost_a = find_best_rotation(stack, cost_a, stack->size_a, 'n');
-	cost_b = find_best_rotation(stack, cost_b, stack->size_b, 'n');
+	cost_a = find_best_rotation(cost_a, stack->size_a, 'n');
+	cost_b = find_best_rotation(cost_b, stack->size_b, 'n');
 	update_best_move(move_data, false, cost_a, cost_b);
 }
 
 void	findbest_move(t_stack *stack, int size, t_move_data *move_data)
 {
 	t_list	*tmp;
-	t_dir	cost_a;
-	t_dir	cost_b;
 
 	tmp = stack->top_a;
 	move_data->total_cost_tmp = MAX_COST;
@@ -64,7 +62,7 @@ void	findbest_move(t_stack *stack, int size, t_move_data *move_data)
 	}
 }
 
-int	push_swap_resolver_complex(t_stack *stack)
+void	push_swap_resolver_complex(t_stack *stack)
 {
 	t_dir		max;
 	t_move_data	move_data;
@@ -81,8 +79,7 @@ int	push_swap_resolver_complex(t_stack *stack)
 		pb(stack);
 	}
 	update_stack_limits(stack);
-	max = find_best_rotation(stack,
-			count_cost_b_to_max(stack), stack->size_b, 'p');
+	max = find_best_rotation(count_cost_b_to_max(stack), stack->size_b, 'p');
 	apply_rotation(stack, &max, rb, rrb);
 	while (stack->size_b)
 		pa(stack);

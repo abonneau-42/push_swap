@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 00:33:51 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 15:52:42 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:15:34 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	check_number(char *chr, int *a_values, int *i)
 int	push_swap_parser(int argc, char **argv, int *a_values)
 {
 	int		i;
-	char	**tab;
 
 	if (argc == 2)
 	{

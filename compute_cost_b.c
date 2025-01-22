@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 20:11:58 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 16:38:46 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:03:34 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	find_position(t_stack *stack, int value,
 	int *nearest_min_value, int *nearest_max_value)
 {
-	int		i;
+	size_t	i;
 	t_list	*tmp;
 
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 02:30:04 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 16:01:52 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:06:45 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ int	word_count(char *s, char c)
 		{
 			word++;
 			while (*s && *s != c)
-				*s++;
+				s++;
 		}
 		else
-			*s++;
+			s++;
 	}
 	return (word);
 }
 
-char	*strndup(char *str, size_t n)
+char	*strndup(const char *str, size_t n)
 {
 	char	*newstr;
 
@@ -70,14 +70,14 @@ char	**ft_split(const char *s, char c)
 			i = 0;
 			while (s[i] && s[i] != c)
 				i++;
-			tab[j] = strndup((char *)s, i);
+			tab[j] = strndup(s, i);
 			if (!tab[j])
 				return (free_tab(tab, j));
 			j++;
 			s = s + i;
 		}
 		else
-			*s++;
+			s++;
 	}
 	tab[j] = NULL;
 	return (tab);

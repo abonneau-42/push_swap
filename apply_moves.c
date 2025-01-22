@@ -6,13 +6,13 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 14:57:50 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 16:43:29 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:02:53 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	apply_moves(t_stack *stack, long *value, void(*rotate)(t_stack *))
+void	apply_moves(t_stack *stack, size_t *value, void(*rotate)(t_stack *))
 {
 	while (*value)
 	{
@@ -21,7 +21,7 @@ void	apply_moves(t_stack *stack, long *value, void(*rotate)(t_stack *))
 	}
 }
 
-void	common_action_handler(t_stack *stack, long common_action, char direction)
+void	common_action_handler(t_stack *stack, size_t common_action, char direction)
 {
 	if (direction == 'n')
 		apply_moves(stack, &common_action, rr);

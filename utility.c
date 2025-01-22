@@ -6,13 +6,13 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:07:23 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 15:56:04 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:15:14 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	**free_char_tab(char **char_tab)
+int	free_char_tab(char **char_tab)
 {
 	int	i;
 
@@ -20,6 +20,7 @@ void	**free_char_tab(char **char_tab)
 	while (char_tab[i])
 		free(char_tab[i++]);
 	free(char_tab);
+	return (1);
 }
 
 int	count_tab_size(char **tab)

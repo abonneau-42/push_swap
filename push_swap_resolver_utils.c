@@ -6,20 +6,20 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:01:13 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 16:40:40 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:10:57 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_dir	invert_rotation(t_stack *stack, t_dir cost, int stack_size)
+t_dir	invert_rotation(t_dir cost, int stack_size)
 {
 	cost.value = stack_size - cost.value;
 	cost.dir = 'p';
 	return (cost);
 }
 
-t_dir	find_best_rotation(t_stack *stack, t_dir cost, int stack_size, char dir)
+t_dir	find_best_rotation(t_dir cost, size_t stack_size, char dir)
 {
 	if (cost.value > stack_size / 2)
 	{
@@ -32,7 +32,7 @@ t_dir	find_best_rotation(t_stack *stack, t_dir cost, int stack_size, char dir)
 void	update_stack_limits(t_stack *stack)
 {
 	t_list	*tmp;
-	int		i;
+	size_t	i;
 
 	tmp = stack->top_b;
 	i = 0;
@@ -66,7 +66,7 @@ void	handle_common_actions(t_stack *stack, t_dir *dirs)
 void	update_best_move(t_move_data *move_data, t_bool is_double_rotation,
 	t_dir cost_a, t_dir cost_b)
 {
-	long	total_cost;
+	size_t	total_cost;
 
 	total_cost = MAX_COST;
 	if (is_double_rotation)

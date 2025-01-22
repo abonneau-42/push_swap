@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:50 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 16:44:37 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:15:28 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ typedef struct s_stack
 
 typedef struct s_dir
 {
-	long	value;
+	size_t	value;
 	char	dir;
 }	t_dir;
 
 typedef struct s_move_data
 {
-	long	total_cost_tmp;
+	size_t	total_cost_tmp;
 	t_dir	dirs[2];
 }	t_move_data;
 
@@ -61,7 +61,7 @@ int		create_bidir_list(t_list **a, int *a_values, size_t size_a);
 void	lstadd_bidir_front(t_list **top, int value);
 int		push_swap_parser(int argc, char **argv, int *a_values);
 char	**ft_split(const char *s, char c);
-void	**free_char_tab(char **char_tab);
+int		free_char_tab(char **char_tab);
 int		count_tab_size(char **tab);
 int		push_swap_resolver(t_stack *stack);
 long	ft_abs(int number);
@@ -101,15 +101,15 @@ int		stack_initialiser(t_stack *stack, int *a_values);
 int		push_swap_pre_parser(t_stack *stack, int argc,
 			char **argv, int **a_values);
 
-void	apply_moves(t_stack *stack, long *value, void(*rotate)(t_stack *));
+void	apply_moves(t_stack *stack, size_t *value, void(*rotate)(t_stack *));
 void	common_action_handler(t_stack *stack,
-			long common_action, char direction);
+			size_t common_action, char direction);
 void	apply_rotation(t_stack *stack, t_dir *dir,
 			void (*rotate)(t_stack *), void (*reverse_rotate)(t_stack *));
 
-t_dir	invert_rotation(t_stack *stack, t_dir cost, int stack_size);
-t_dir	find_best_rotation(t_stack *stack, t_dir cost,
-			int stack_size, char dir);
+t_dir	invert_rotation(t_dir cost, int stack_size);
+t_dir	find_best_rotation(t_dir cost,
+			size_t stack_size, char dir);
 
 void	update_stack_limits(t_stack *stack);
 void	handle_common_actions(t_stack *stack, t_dir *dirs);
