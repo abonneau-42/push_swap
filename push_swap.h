@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:50 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 16:10:42 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:28:53 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <stdio.h>
 
-typedef enum s_bool
+typedef enum e_bool
 {
 	false = 0,
 	true = 1
@@ -51,7 +51,7 @@ typedef struct s_dir
 typedef struct s_move_data
 {
 	long	total_cost_tmp;
-	t_dir	*dirs;
+	t_dir	dirs[2];
 }	t_move_data;
 
 long	ft_atoi(const char *nptr);
@@ -65,6 +65,9 @@ int		push_swap_resolver(t_stack *stack);
 long	ft_abs(int number);
 int		ft_min(int first, int second);
 int		ft_max(int first, int second);
+
+int		is_number(char *str);
+size_t	ft_strlen(const char *s);
 
 t_dir	count_cost_to_push_value(t_stack *stack, int value);
 t_dir	count_cost_b_to_max(t_stack *stack);
