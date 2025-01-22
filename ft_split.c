@@ -6,78 +6,87 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 02:30:04 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 17:06:45 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:37:25 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-char	**free_tab(char **char_tab, int size)
+char	**free_tab(char **tab, int size)
 {
 	while (size--)
-		free(char_tab[size]);
-	free(char_tab);
+		free(tab[size]);
+	free(tab);
 	return (NULL);
 }
 
-int	word_count(char *s, char c)
+int	count_words(const char *s, char c)
 {
-	int	word;
+	int	count;
+	int	in_word;
 
-	word = 0;
+	count = 0;
+	in_word = 0;
 	while (*s)
 	{
-		if (*s != c)
+		if (*s != c && in_word == 0)
 		{
-			word++;
-			while (*s && *s != c)
-				s++;
+			in_word = 1;
+			count++;
 		}
-		else
-			s++;
+		if (*s == c)
+			in_word = 0;
+		s++;
 	}
-	return (word);
+	return (count);
 }
 
-char	*strndup(const char *str, size_t n)
+char	*get_word(const char *s, char c)
 {
-	char	*newstr;
+	int		len;
+	char	*word;
+	int		i;
 
-	newstr = malloc(sizeof(char) * (n + 1));
-	if (!newstr)
+	len = 0;
+	while (s[len] && s[len] != c)
+		len++;
+	word = malloc(sizeof(char) * (len + 1));
+	if (!word)
 		return (NULL);
-	newstr[n] = '\0';
-	while (n--)
-		newstr[n] = str[n];
-	return (newstr);
+	i = 0;
+	while (i < len)
+	{
+		word[i] = s[i];
+		i++;
+	}
+	word[i] = '\0';
+	return (word);
 }
 
 char	**ft_split(const char *s, char c)
 {
 	char	**tab;
-	int		i;
+	int		words;
 	int		j;
 
-	i = 0;
-	j = 0;
-	tab = malloc(sizeof(char *) * (word_count((char *)s, c) + 1));
+	words = count_words(s, c);
+	tab = malloc(sizeof(char *) * (words + 1));
 	if (!tab)
 		return (NULL);
+	j = 0;
 	while (*s)
 	{
-		if (*s != c)
+		while (*s == c && *s)
+			s++;
+		if (*s)
 		{
-			i = 0;
-			while (s[i] && s[i] != c)
-				i++;
-			tab[j] = strndup(s, i);
+			tab[j] = get_word(s, c);
 			if (!tab[j])
 				return (free_tab(tab, j));
 			j++;
-			s = s + i;
+			while (*s && *s != c)
+				s++;
 		}
-		else
-			s++;
 	}
 	tab[j] = NULL;
 	return (tab);
