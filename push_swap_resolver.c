@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:38:09 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/23 01:15:54 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/23 02:17:54 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ void	compute_best_move(t_stack *stack, t_list *tmp, t_move_data *move_data)
 
 	cost_a = count_cost_to_push_value(stack, tmp->value);
 	cost_b = count_cost_b(stack, tmp);
-	update_best_move(move_data, true, cost_a, cost_b);
+	update_best_move(move_data, TRUE, cost_a, cost_b);
 	cost_a = invert_rotation(cost_a, stack->size_a);
 	cost_b = invert_rotation(cost_b, stack->size_b);
-	update_best_move(move_data, true, cost_a, cost_b);
+	update_best_move(move_data, TRUE, cost_a, cost_b);
 	cost_a = find_best_rotation(cost_a, stack->size_a, 'n');
 	cost_b = find_best_rotation(cost_b, stack->size_b, 'n');
-	update_best_move(move_data, false, cost_a, cost_b);
+	update_best_move(move_data, FALSE, cost_a, cost_b);
 }
 
 void	findbest_move(t_stack *stack, int size, t_move_data *move_data)

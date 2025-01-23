@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:01:13 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 18:56:54 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/23 02:17:27 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ void	handle_common_actions(t_stack *stack, t_dir *dirs)
 	}
 }
 
-void	update_best_move(t_move_data *move_data, t_bool is_double_rotation,
-	t_dir cost_a, t_dir cost_b)
+void	update_best_move(t_move_data *move_data, t_bool is_double_rotation, t_dir cost_a, t_dir cost_b)
 {
 	size_t	total_cost;
 

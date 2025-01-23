@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:50 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 18:57:30 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/23 02:21:44 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 typedef enum e_bool
 {
-	false = 0,
-	true = 1
+	FALSE = 0,
+	TRUE = 1
 }	t_bool;
 
 typedef struct s_list
@@ -103,7 +103,7 @@ int		stack_initialiser(t_stack *stack, int *a_values);
 int		push_swap_pre_parser(t_stack *stack, int argc,
 			char **argv, int **a_values);
 
-void	apply_moves(t_stack *stack, size_t *value, void(*rotate)(t_stack *));
+void	apply_moves(t_stack *stack, size_t *value, void (*rotate)(t_stack *));
 void	common_action_handler(t_stack *stack,
 			size_t common_action, char direction);
 void	apply_rotation(t_stack *stack, t_dir *dir,

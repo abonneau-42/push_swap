@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 00:33:51 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 17:15:34 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/23 02:46:49 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,18 @@ int	push_swap_parser(int argc, char **argv, int *a_values)
 {
 	int		i;
 
+	i = 1;
 	if (argc == 2)
 	{
-		i = 1;
 		while (argv[i - 1])
 			if (!check_number(argv[i - 1], a_values, &i) && free_char_tab(argv))
 				return (0);
 		free_char_tab(argv);
 	}
 	else
-	{
-		i = 1;
 		while (i < argc)
 			if (!check_number(argv[i], a_values, &i))
 				return (0);
-	}
 	return (1);
 }
 
@@ -75,12 +72,11 @@ int	push_swap_pre_parser(t_stack *stack, int argc, char **argv, int **a_values)
 		tab = ft_split(argv[1], ' ');
 		if (!tab)
 			return (1);
+		// pas catch dans le main;
 		stack->size_a = count_tab_size(tab);
-		*a_values = malloc(sizeof(int) * stack->size_a);
 		argv = tab;
 	}
-	else
-		*a_values = malloc(sizeof(int) * stack->size_a);
+	*a_values = malloc(sizeof(int) * stack->size_a);
 	if (!*a_values)
 		return (1);
 	if (!push_swap_parser(argc, argv, *a_values))
