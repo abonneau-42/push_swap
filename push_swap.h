@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:50 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/23 23:02:16 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/24 00:10:41 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 
 # define MAX_COST 17179869184
+# define FACTOR_STACK_A 0.04
 
 typedef enum e_bool
 {

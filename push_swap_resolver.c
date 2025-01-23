@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:38:09 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/23 23:37:46 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/24 00:00:13 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	push_swap_resolver_complex(t_stack *stack)
 	if (stack->size_a < 100)
 		i = 3;
 	else
-		i = stack->size_a * 0.04;
+		i = stack->size_a * FACTOR_STACK_A;
 	pb(stack);
 	pb(stack);
 	while (stack->size_a - i)
