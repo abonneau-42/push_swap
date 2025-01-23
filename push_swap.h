@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:50 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/23 02:21:44 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/23 23:02:16 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ int		push_swap_resolver(t_stack *stack);
 long	ft_abs(int number);
 int		ft_min(int first, int second);
 int		ft_max(int first, int second);
+void	push_swap_3(t_stack	*stack);
+void 	push_swap_5(t_stack *stack);
+int		push_swap_n(t_stack *stack, size_t n);
 
 int		is_number(char *str);
 size_t	ft_strlen(const char *s);
@@ -77,6 +80,7 @@ t_dir	count_cost_to_push_value(t_stack *stack, int value);
 t_dir	count_cost_b_to_max(t_stack *stack);
 t_dir	count_cost_b_to_value(t_stack *stack, int value);
 t_dir	count_cost_b(t_stack *stack, t_list *lst);
+t_dir	count_cost_b_to_a(t_stack *stack, int value, int init_decrement);
 
 void	sa(t_stack *stack);
 void	sb(t_stack *stack);
