@@ -6,13 +6,13 @@
 #    By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/15 13:06:53 by abonneau          #+#    #+#              #
-#    Updated: 2025/01/22 17:23:21 by abonneau         ###   ########.fr        #
+#    Updated: 2025/01/22 21:09:07 by abonneau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 NAME = push_swap
-CFLAGS = -Wall -Werror -Wextra -I .
+CFLAGS = -Wall -Werror -Wextra -I . -g3
 DDIR = ./.build/
 HEADER = push_swap.h
 SRCS = 			apply_moves.c \

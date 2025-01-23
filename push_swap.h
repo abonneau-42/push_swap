@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:50 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 17:15:28 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:57:30 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_stack
 	size_t	size_b;
 	int		max_b;
 	int		min_b;
+	int		max_a;
+	int		min_a;
 }	t_stack;
 
 typedef struct s_dir
@@ -115,5 +117,5 @@ void	update_stack_limits(t_stack *stack);
 void	handle_common_actions(t_stack *stack, t_dir *dirs);
 void	update_best_move(t_move_data *move_data,
 			t_bool is_double_rotation, t_dir cost_a, t_dir cost_b);
-
+void	update_stack_limits_a(t_stack *stack);
 #endif
