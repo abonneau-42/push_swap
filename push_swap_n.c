@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:12:36 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/31 03:22:04 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/31 13:46:28 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,10 @@ t_dir	find_dir(t_stack *stack, int value)
 	return (cost);
 }
 
-void	push_swap_n_sorter(t_stack *stack, size_t n, int *tab, t_dir dir)
+void	push_swap_n_sorter(t_stack *stack, size_t n, int *tab)
 {
 	size_t	i;
+	t_dir	dir;
 
 	i = 0;
 	while (i < n - 3)
@@ -96,7 +97,6 @@ int	push_swap_n(t_stack *stack, size_t n)
 {
 	int		*tab;
 	size_t	i;
-	t_dir	dir;
 	t_list	*tmp;
 
 	tab = malloc(sizeof(int) * n);
@@ -111,6 +111,6 @@ int	push_swap_n(t_stack *stack, size_t n)
 		i++;
 	}
 	sort_tab(tab, n);
-	push_swap_n_sorter(stack, n, tab, dir);
+	push_swap_n_sorter(stack, n, tab);
 	return (1);
 }
