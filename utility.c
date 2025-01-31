@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 03:07:23 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/22 17:15:14 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/31 04:48:02 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,12 @@ int	is_number(char *str)
 	int	i;
 
 	i = 0;
-	if (str[i] == '-')
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i + 1] == '\0')
+			return (0);
 		i++;
+	}
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')

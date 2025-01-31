@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:01:13 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/23 02:17:27 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/31 03:21:27 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,46 +29,6 @@ t_dir	find_best_rotation(t_dir cost, size_t stack_size, char dir)
 	return (cost);
 }
 
-void	update_stack_limits(t_stack *stack)
-{
-	t_list	*tmp;
-	size_t	i;
-
-	tmp = stack->top_b;
-	i = 0;
-	stack->max_b = stack->top_b->value;
-	stack->min_b = stack->top_b->value;
-	while (i < stack->size_b)
-	{
-		if (tmp->value > stack->max_b)
-			stack->max_b = tmp->value;
-		if (tmp->value < stack->min_b)
-			stack->min_b = tmp->value;
-		tmp = tmp->next;
-		i++;
-	}
-}
-
-void	update_stack_limits_a(t_stack *stack)
-{
-	t_list	*tmp;
-	size_t	i;
-
-	tmp = stack->top_a;
-	i = 0;
-	stack->max_a = stack->top_a->value;
-	stack->min_a = stack->top_a->value;
-	while (i < stack->size_a)
-	{
-		if (tmp->value > stack->max_a)
-			stack->max_a = tmp->value;
-		if (tmp->value < stack->min_a)
-			stack->min_a = tmp->value;
-		tmp = tmp->next;
-		i++;
-	}
-}
-
 void	handle_common_actions(t_stack *stack, t_dir *dirs)
 {
 	long	common_action;
@@ -83,7 +43,8 @@ void	handle_common_actions(t_stack *stack, t_dir *dirs)
 	}
 }
 
-void	update_best_move(t_move_data *move_data, t_bool is_double_rotation, t_dir cost_a, t_dir cost_b)
+void	update_best_move(t_move_data *move_data,
+	t_bool is_double_rotation, t_dir cost_a, t_dir cost_b)
 {
 	size_t	total_cost;
 

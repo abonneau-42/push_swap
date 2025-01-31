@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:50 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/24 00:10:41 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/31 04:53:58 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 
 # define MAX_COST 17179869184
 # define FACTOR_STACK_A 0.04
@@ -71,7 +70,6 @@ long	ft_abs(int number);
 int		ft_min(int first, int second);
 int		ft_max(int first, int second);
 void	push_swap_3(t_stack	*stack);
-void 	push_swap_5(t_stack *stack);
 int		push_swap_n(t_stack *stack, size_t n);
 
 int		is_number(char *str);
@@ -118,7 +116,7 @@ t_dir	invert_rotation(t_dir cost, int stack_size);
 t_dir	find_best_rotation(t_dir cost,
 			size_t stack_size, char dir);
 
-void	update_stack_limits(t_stack *stack);
+void	update_stack_limits_b(t_stack *stack);
 void	handle_common_actions(t_stack *stack, t_dir *dirs);
 void	update_best_move(t_move_data *move_data,
 			t_bool is_double_rotation, t_dir cost_a, t_dir cost_b);

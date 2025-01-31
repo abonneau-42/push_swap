@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:59 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/23 02:31:46 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/31 03:48:20 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,8 @@ int	main(int argc, char **argv)
 	t_stack	stack;
 	int		*a_values;
 
-	if (push_swap_pre_parser(&stack, argc, argv, &a_values) == 2)
-	{
-		free(a_values);
+	if (push_swap_pre_parser(&stack, argc, argv, &a_values) > 0)
 		return (1);
-	}
 	if (!stack_initialiser(&stack, a_values))
 	{
 		push_swap_free(&stack, a_values);

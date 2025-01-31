@@ -6,39 +6,11 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:38:09 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/24 00:00:13 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/31 04:32:13 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void print_stack_a(t_stack *stack)
-{
-    t_list *tmp;
-	size_t i = 0;
-
-    tmp = stack->top_a;
-    while (i < stack->size_a)
-    {
-        printf("%d\n", tmp->value);
-        tmp = tmp->next;
-		i++;
-    }
-}
-
-// void print_stack_b(t_stack *stack)
-// {
-//     t_list *tmp;
-// 	size_t i = 0;
-
-//     tmp = stack->top_b;
-//     while (i < stack->size_b)
-//     {
-//         printf("%d\n", tmp->value);
-//         tmp = tmp->next;
-// 		i++;
-//     }
-// }
 
 void	compute_best_move(t_stack *stack, t_list *tmp, t_move_data *move_data)
 {
@@ -71,29 +43,12 @@ void	findbest_move(t_stack *stack, int size, t_move_data *move_data)
 	}
 }
 
-void	push_swap_resolver_complex(t_stack *stack)
+void	push_swap_resolver_complex_pa(t_stack *stack, int i)
 {
 	t_dir		max;
-	t_move_data	move_data;
 	t_dir		cost;
-	int			i;
 
-	if (stack->size_a < 100)
-		i = 3;
-	else
-		i = stack->size_a * FACTOR_STACK_A;
-	pb(stack);
-	pb(stack);
-	while (stack->size_a - i)
-	{
-		update_stack_limits(stack);
-		findbest_move(stack, stack->size_a, &move_data);
-		handle_common_actions(stack, move_data.dirs);
-		apply_rotation(stack, &move_data.dirs[0], ra, rra);
-		apply_rotation(stack, &move_data.dirs[1], rb, rrb);
-		pb(stack);
-	}
-	update_stack_limits(stack);
+	update_stack_limits_b(stack);
 	max = find_best_rotation(count_cost_b_to_max(stack), stack->size_b, 'p');
 	apply_rotation(stack, &max, rb, rrb);
 	push_swap_n(stack, i);
@@ -109,6 +64,30 @@ void	push_swap_resolver_complex(t_stack *stack)
 		rra(stack);
 }
 
+void	push_swap_resolver_complex(t_stack *stack)
+{
+	t_move_data	move_data;
+	int			i;
+
+	if (stack->size_a < 100)
+		i = 3;
+	else
+		i = stack->size_a * FACTOR_STACK_A;
+	if (stack->size_a > 4)
+		pb(stack);
+	pb(stack);
+	while (stack->size_a - i)
+	{
+		update_stack_limits_b(stack);
+		findbest_move(stack, stack->size_a, &move_data);
+		handle_common_actions(stack, move_data.dirs);
+		apply_rotation(stack, &move_data.dirs[0], ra, rra);
+		apply_rotation(stack, &move_data.dirs[1], rb, rrb);
+		pb(stack);
+	}
+	push_swap_resolver_complex_pa(stack, i);
+}
+
 int	push_swap_resolver(t_stack *stack)
 {
 	if (stack->size_a == 2)
@@ -122,6 +101,5 @@ int	push_swap_resolver(t_stack *stack)
 		push_swap_3(stack);
 	else
 		push_swap_resolver_complex(stack);
-	// print_stack_a(stack);
 	return (1);
 }

@@ -1,34 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_5.c                                      :+:      :+:    :+:   */
+/*   push_swap_n.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:12:36 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/23 23:48:23 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/31 03:22:04 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_tab(int *tab, int size) {
-    int tmp;
-    int i = 0;
-    
-    while (i < size - 1) {
-        int j = 0;
-        while (j < size - i - 1) {
-            if (tab[j] > tab[j + 1]) {
-                // Échanger les éléments
-                tmp = tab[j];
-                tab[j] = tab[j + 1];
-                tab[j + 1] = tmp;
-            }
-            j++;
-        }
-        i++;
-    }
+void	sort_tab(int *tab, int size)
+{
+	int	tmp;
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < size - 1)
+	{
+		j = 0;
+		while (j < size - i - 1)
+		{
+			if (tab[j] > tab[j + 1])
+			{
+				tmp = tab[j];
+				tab[j] = tab[j + 1];
+				tab[j + 1] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
 void	push_swap_3(t_stack	*stack)
@@ -50,13 +55,12 @@ void	push_swap_3(t_stack	*stack)
 		sa(stack);
 }
 
-
-// Trouver l'index d'une valeur dans la pile A
 t_dir	find_dir(t_stack *stack, int value)
 {
-	t_list	*tmp = stack->top_a;
+	t_list	*tmp;
 	t_dir	cost;
 
+	tmp = stack->top_a;
 	cost = (t_dir){.value = 0, .dir = 'n'};
 	while (tmp)
 	{
@@ -69,53 +73,10 @@ t_dir	find_dir(t_stack *stack, int value)
 	return (cost);
 }
 
-void	push_swap_5(t_stack *stack)
+void	push_swap_n_sorter(t_stack *stack, size_t n, int *tab, t_dir dir)
 {
-	int	tab[5];
 	size_t	i;
-	t_dir dir;
 
-	i = 0;
-	t_list *tmp = stack->top_a;
-	while (i < stack->size_a)
-	{
-		tab[i] = tmp->value;
-		tmp = tmp->next;
-		i++;
-	}
-	sort_tab(tab, 5);
-	dir = find_dir(stack, tab[0]);
-	apply_rotation(stack, &dir, ra, rra);
-	pb(stack);
-	dir = find_dir(stack, tab[1]);
-	apply_rotation(stack, &dir, ra, rra);
-	pb(stack);
-	push_swap_3(stack);
-	pa(stack);
-	pa(stack);
-}
-
-int	push_swap_n(t_stack *stack, size_t n)
-{
-	int		*tab;
-	size_t	i;
-	t_dir dir;
-
-	if (n > 3)
-	{
-		tab = malloc(sizeof(int) * n);
-		if (!tab)
-			return (0);
-		t_list *tmp = stack->top_a;
-		i = 0;
-		while (i < stack->size_a)
-		{
-			tab[i] = tmp->value;
-			tmp = tmp->next;
-			i++;
-		}
-		sort_tab(tab, n);
-	}
 	i = 0;
 	while (i < n - 3)
 	{
@@ -124,18 +85,32 @@ int	push_swap_n(t_stack *stack, size_t n)
 		pb(stack);
 		i++;
 	}
-	if (n > 3)
-		free(tab);
+	free(tab);
 	push_swap_3(stack);
 	i = 0;
-	while (i < n - 3)
-	{
+	while (i++ < n - 3)
 		pa(stack);
-		i++;
-	}
-	return (1);
 }
 
+int	push_swap_n(t_stack *stack, size_t n)
+{
+	int		*tab;
+	size_t	i;
+	t_dir	dir;
+	t_list	*tmp;
 
-
-
+	tab = malloc(sizeof(int) * n);
+	if (!tab)
+		return (0);
+	tmp = stack->top_a;
+	i = 0;
+	while (i < stack->size_a)
+	{
+		tab[i] = tmp->value;
+		tmp = tmp->next;
+		i++;
+	}
+	sort_tab(tab, n);
+	push_swap_n_sorter(stack, n, tab, dir);
+	return (1);
+}

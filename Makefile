@@ -6,7 +6,7 @@
 #    By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/15 13:06:53 by abonneau          #+#    #+#              #
-#    Updated: 2025/01/23 19:14:58 by abonneau         ###   ########.fr        #
+#    Updated: 2025/01/31 03:21:52 by abonneau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRCS = 			apply_moves.c \
 				reverse_swap.c \
 				stack_initialiser.c \
 				utility.c \
-				push_swap_5.c \
+				push_swap_n.c \
+				update_stack_limits.c \
 
 OBJS = $(addprefix $(DDIR),$(SRCS:.c=.o))
 

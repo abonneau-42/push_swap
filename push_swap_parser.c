@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 00:33:51 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/23 02:46:49 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/01/31 04:49:47 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,29 @@ int	push_swap_parser(int argc, char **argv, int *a_values)
 	return (1);
 }
 
+int	allocate_and_parse(t_stack *stack, int argc, char **argv, int **a_values)
+{
+	*a_values = malloc(sizeof(int) * stack->size_a);
+	if (!*a_values)
+	{
+		if (argc == 2)
+			free_char_tab(argv);
+		return (1);
+	}
+	if (!push_swap_parser(argc, argv, *a_values))
+	{
+		write(2, "Error\n", 6);
+		free(*a_values);
+		return (2);
+	}
+	if (stack->size_a < 2)
+	{
+		free(*a_values);
+		return (2);
+	}
+	return (0);
+}
+
 int	push_swap_pre_parser(t_stack *stack, int argc, char **argv, int **a_values)
 {
 	char	**tab;
@@ -72,19 +95,8 @@ int	push_swap_pre_parser(t_stack *stack, int argc, char **argv, int **a_values)
 		tab = ft_split(argv[1], ' ');
 		if (!tab)
 			return (1);
-		// pas catch dans le main;
 		stack->size_a = count_tab_size(tab);
 		argv = tab;
 	}
-	*a_values = malloc(sizeof(int) * stack->size_a);
-	if (!*a_values)
-		return (1);
-	if (!push_swap_parser(argc, argv, *a_values))
-	{
-		write(2, "Error\n", 6);
-		return (2);
-	}
-	if (stack->size_a < 2)
-		return (2);
-	return (0);
+	return (allocate_and_parse(stack, argc, argv, a_values));
 }
