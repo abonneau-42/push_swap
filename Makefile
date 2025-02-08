@@ -1,59 +1,54 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/15 13:06:53 by abonneau          #+#    #+#              #
-#    Updated: 2025/01/31 14:09:22 by abonneau         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 CC = cc
 NAME = push_swap
-CFLAGS = -Wall -Werror -Wextra
-DDIR = ./.build/
+
+BUILD_DIR = .build
+INCLUDES_DIR = ./includes
 HEADER = push_swap.h
-SRCS = 			apply_moves.c \
-				base_push.c \
-				base_reverse_rotate.c \
-				base_rotate.c \
-				base_swap.c \
-				compute_cost_a.c \
-				compute_cost_b.c \
-				create_bidir_list.c \
-				ft_atoi.c \
-				ft_split.c \
-				lstadd_bidir_front.c \
-				math_utility.c \
-				push_swap_free.c \
-				push_swap_parser.c \
-				push_swap_resolver_utils.c \
-				push_swap_resolver.c \
+
+CFLAGS = -Wall -Werror -Wextra -I $(INCLUDES_DIR)
+INCLUDES_FILES = $(addprefix $(INCLUDES_DIR)/, $(HEADER))
+
+SRCS_DIR = srcs
+SRCS_FILES = 	utils/apply_moves.c \
+				instructions/base_push.c \
+				instructions/base_reverse_rotate.c \
+				instructions/base_rotate.c \
+				instructions/base_swap.c \
+				compute_cost/compute_cost_a.c \
+				compute_cost/compute_cost_b.c \
+				initialiser/create_bidir_list.c \
+				utils/ft_atoi.c \
+				utils/ft_split.c \
+				utils/lstadd_bidir_front.c \
+				utils/math_utility.c \
+				initialiser/push_swap_free.c \
+				parser/push_swap_parser.c \
+				resolver/push_swap_resolver_utils.c \
+				resolver/push_swap_resolver.c \
 				push_swap.c \
-				reverse_swap.c \
-				stack_initialiser.c \
-				utility.c \
-				push_swap_n.c \
-				update_stack_limits.c \
+				instructions/reverse_swap.c \
+				initialiser/stack_initialiser.c \
+				utils/utility.c \
+				resolver/push_swap_n.c \
+				resolver/update_stack_limits.c \
 
-OBJS = $(addprefix $(DDIR),$(SRCS:.c=.o))
-
-all: $(NAME)
+SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
+OBJS = $(patsubst $(SRCS_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRCS))
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-$(DDIR)%.o: %.c $(HEADER) Makefile
+$(BUILD_DIR)/%.o: $(SRCS_DIR)/%.c $(INCLUDES_FILES) Makefile
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+all: $(NAME)
+
 clean:
-	rm -rf $(DDIR)
+	rm -rf $(BUILD_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
 

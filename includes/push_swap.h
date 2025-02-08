@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:47:50 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/31 04:53:58 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/02/08 23:23:55 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ typedef enum e_bool
 	FALSE = 0,
 	TRUE = 1
 }	t_bool;
+
+typedef enum e_push_swap_error
+{
+	VALID_PARAMS = 0,
+	MALOC_FAILURE = 1,
+	ARGS_NOT_VALID = 2,
+	ALREADY_SORTED = 3,
+}	t_push_swap_error;
 
 typedef struct s_list
 {

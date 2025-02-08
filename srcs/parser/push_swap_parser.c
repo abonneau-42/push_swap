@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 00:33:51 by abonneau          #+#    #+#             */
-/*   Updated: 2025/01/31 04:49:47 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/02/08 23:32:16 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,31 +64,38 @@ int	push_swap_parser(int argc, char **argv, int *a_values)
 
 int	allocate_and_parse(t_stack *stack, int argc, char **argv, int **a_values)
 {
+	size_t	i;
+
+	i = 0;
 	*a_values = malloc(sizeof(int) * stack->size_a);
 	if (!*a_values)
 	{
 		if (argc == 2)
 			free_char_tab(argv);
-		return (1);
+		return (MALOC_FAILURE);
 	}
 	if (!push_swap_parser(argc, argv, *a_values))
 	{
 		write(2, "Error\n", 6);
 		free(*a_values);
-		return (2);
+		return (ARGS_NOT_VALID);
 	}
-	if (stack->size_a < 2)
+	while (i < stack->size_a - 1)
 	{
-		free(*a_values);
-		return (2);
+		if ((*a_values)[i] > (*a_values)[i + 1])
+			return (VALID_PARAMS);
+		i++;
 	}
-	return (0);
+	free(*a_values);
+	return (ALREADY_SORTED);
 }
 
 int	push_swap_pre_parser(t_stack *stack, int argc, char **argv, int **a_values)
 {
 	char	**tab;
 
+	if (argc < 2)
+		return (ARGS_NOT_VALID);
 	stack->size_a = argc - 1;
 	if (argc == 2)
 	{
