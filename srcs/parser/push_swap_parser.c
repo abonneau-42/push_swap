@@ -6,7 +6,7 @@
 /*   By: abonneau <abonneau@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 00:33:51 by abonneau          #+#    #+#             */
-/*   Updated: 2025/02/08 23:32:16 by abonneau         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:57:58 by abonneau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	push_swap_parser(int argc, char **argv, int *a_values)
 	}
 	else
 		while (i < argc)
-			if (!check_number(argv[i], a_values, &i))
+			if (!*argv[i] || !check_number(argv[i], a_values, &i))
 				return (0);
 	return (1);
 }
@@ -99,6 +99,11 @@ int	push_swap_pre_parser(t_stack *stack, int argc, char **argv, int **a_values)
 	stack->size_a = argc - 1;
 	if (argc == 2)
 	{
+		if (!*argv[1])
+		{
+			write(2, "Error\n", 6);
+			return (ARGS_NOT_VALID);
+		}
 		tab = ft_split(argv[1], ' ');
 		if (!tab)
 			return (1);
